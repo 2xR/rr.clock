@@ -14,16 +14,24 @@ class Timer:
 
     Example usage:
 
+        import time
         from rr.timer import Timer
 
+        def busy_sleep(duration):
+            start = time.time()
+            while time.time() - start < duration:
+                pass
+
         timer = Timer()
+        print(timer)
         with timer.tracking():
             assert timer.active
-            foo()
-            print("Time elapased after foo(): {} and {}".format(timer.cpu, timer.wall))
-            bar()
-        print("Time elapased after bar(): {} and {}".format(timer.cpu, timer.wall))
+            print(timer)
+            time.sleep(1)
+            print(timer)
+            busy_sleep(1)
         assert not timer.active
+        print(timer)
     """
 
     def __init__(self):
